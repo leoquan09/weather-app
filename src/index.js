@@ -1,3 +1,5 @@
+import './styles.css';
+
 let form = document.querySelector('#weatherForm');
 let textInput = document.querySelector('#input');
 
@@ -20,13 +22,20 @@ async function getData(city) {
 async function updateUI(city) {
     const weatherData = await getData(city);
     const container = document.querySelector('#content');
-    const content = document.createElement('div');
-    const realTemp = weatherData.accTemp;
-    const feelsLikeTemp = weatherData.feelsLikeTemp;
-    const windSpeed = weatherData.windSpeed;
+    container.innerHTML = '';
+    
+    const realTemp = document.createElement('p');
+    realTemp.textContent = `It is ${weatherData.accTemp} degrees fahrenheit`;
 
-    content.append(realTemp, feelsLikeTemp, windSpeed);
-    container.appendChild(content);
+    const feelsLikeTemp = document.createElement('p');
+    feelsLikeTemp.textContent = `It feels like ${weatherData.feelsLikeTemp} though`
+
+    const windSpeed = document.createElement('p');
+    windSpeed.textContent = `The windspeed is ${weatherData.windSpeed}mph`
+
+    container.appendChild(realTemp);
+    container.appendChild(feelsLikeTemp);
+    container.appendChild(windSpeed);
     
     console.log(weatherData);
 }
